@@ -4,6 +4,26 @@ module "ssh_sg" {
   description = "etcd-ssh"
   vpc_id      =  data.aws_vpc.default.id
 
+  ingress_with_self = [
+    {
+      rule = "all-all"
+    },
+    {
+      from_port   = 2379
+      to_port     = 2379
+      protocol    = 6
+      description = "Service name"
+      self        = true
+    },
+    {
+      from_port = 2380
+      to_port   = 2380
+      protocol  = 6
+      self      = true
+    },
+  ]
+
+
   ingress_with_cidr_blocks = [
     {
       from_port   = 22
@@ -32,6 +52,8 @@ module "ssh_sg" {
       cidr_blocks = "0.0.0.0/0"
     },
   ]
+
+
 }
 
 
