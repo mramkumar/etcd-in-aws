@@ -18,7 +18,7 @@ module "elb_etcd" {
   ]
 
   health_check = {
-    target              = "HTTP:2379/"
+    target              = "TCP:2379/"
     interval            = 30
     healthy_threshold   = 2
     unhealthy_threshold = 2
